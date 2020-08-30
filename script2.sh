@@ -1,6 +1,7 @@
 #!/bin/bash
 # script2
 
+
 # Creating files
 # 5 files in each doctor's 'Vaccines' dir with the name of a vaccine in each file
 for((i=1;i<6;i++)); do

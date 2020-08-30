@@ -14,7 +14,6 @@ for user in "doc1" "doc2"; do
 
     # creating 3 directories in the home dir of each doctor
     sudo mkdir -p /home/$user/{Vaccines,Requests,Symptoms}
-
 done
 
 # Creating accounts for 5 patients for each doctor (doc1p1,doc1p2...)
@@ -37,27 +36,34 @@ echo "Accounts created. The passwords are the same as the usernames!"
 # Creating groups
 
 # Creating a group(virus) with Virus
-sudo addgroup --gid 1002 virus
+sudo addgroup virus
 sudo adduser Virus virus
 
-# Creating two groups with all the patients for each doc
-sudo addgroup --gid 1003 gdoc1
+# Creating two groups(gdoc1, gdoc2) with all the patients for each doc
+sudo addgroup gdoc1
 for((i=1;i<6;i++)); do
-    sudo adduser "doc1p"$i
+    sudo adduser "doc1p"$i gdoc1
 done
 
-sudo addgroup --gid 1004 gdoc2
+sudo addgroup gdoc2
 for((i=1;i<6;i++)); do
-    sudo adduser "doc2p"$i
+    sudo adduser "doc2p"$i gdoc2
 done
 
-# Creating a group for all citizens
+# Creating a group for all citizens (doctors + patients)
 sudo addgroup cit
-sudo adduser doc1
-sudo adduser doc2
+sudo adduser doc1 cit
+sudo adduser doc2 cit
 for((i=1;i<6;i++)); do
-    sudo adduser "doc1p"$i
-    sudo adduser "doc2p"$i
+    sudo adduser "doc1p"$i cit
+    sudo adduser "doc2p"$i cit
+done
+
+# Creating a group for all patients
+sudo addgroup pat
+for((i=1;i<6;i++)); do
+    sudo adduser "doc1p"$i pat
+    sudo adduser "doc2p"$i pat
 done
 
 
